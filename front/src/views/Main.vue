@@ -12,15 +12,19 @@ let isPopupActive = ref(false);
 let popupProduct = ref(null);
 let categories = ref();
 const getProducts = async () => {
-  const {data} = await $api.get('/byCategories');
-  categories.value = data;
-}
+  try {
+    const { data } = await $api.get('/byCategories');
+    categories.value = data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 const closePopup = () => {
   isPopupActive.value = false;
   popupProduct.value = null;
 };
 const openPopup = (product) => {
-  console.log(product)
+  console.log(product);
   popupProduct.value = product;
   isPopupActive.value = true;
 };
@@ -33,7 +37,7 @@ watch(isPopupActive, async (newStatus) => {
 });
 onMounted(() => {
   getProducts();
-})
+});
 </script>
 <template>
   <Popup :active="isPopupActive" @close="closePopup" :product="popupProduct" />
@@ -41,7 +45,11 @@ onMounted(() => {
   <Banners />
   <About />
 
-  <CategoryProducts @open-popup="openPopup" v-for="category in categories" :category="category" />
+  <CategoryProducts
+    @open-popup="openPopup"
+    v-for="category in categories"
+    :category="category"
+  />
   <MobileLinks />
   <Footer />
 </template>
