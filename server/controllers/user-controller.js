@@ -32,7 +32,6 @@ class UserController {
       });
       return res.json(userData);
     } catch (e) {
-      console.log(e);
       next(e);
     }
   }
@@ -57,7 +56,6 @@ class UserController {
       });
       return res.json(userData);
     } catch (e) {
-      console.log(e);
       next(e);
     }
   }

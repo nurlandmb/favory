@@ -66,7 +66,7 @@ async function getProducts() {
 }
 async function checkAuth() {
   try {
-    const response = await axios.get(`http://localhost:5000/api/refresh`, {
+    const response = await $api.get(`http://localhost:5000/api/refresh`, {
       withCredentials: true,
     });
     localStorage.setItem('favory-token', response.data.accessToken);
