@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import $api from '../https/index.js';
+import axios from 'axios';
 const router = useRouter();
 const email = ref('');
 const password = ref('');
@@ -20,7 +21,7 @@ const submitHandler = async () => {
     isValid.value = true;
   }
   try {
-    const res = await $api.post('/login', {
+    const res = await axios.post('http://localhost:5000/api/login', {
       email: email.value,
       password: password.value,
     });
