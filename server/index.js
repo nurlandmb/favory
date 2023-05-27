@@ -8,7 +8,7 @@ const errorMiddleware = require('./middleware/error-middleware');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const app = express();
-
+console.log(process.env.CLIENT_URL)
 app.use(express.json());
 app.use(cookieParser());
 app.use(
