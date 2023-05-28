@@ -2,31 +2,32 @@
   <section class="banners">
     <div class="swiper-pagination"></div>
     <swiper
-      :breakpoints="{ 600:{ slidesPerView:1 }, 900:{ slidesPerView:1.2, } }"
+      :breakpoints="{ 600: { slidesPerView: 1 }, 900: { slidesPerView: 1.2 } }"
       space-between="30"
       :centered-slides="true"
       :pagination="pagination"
       class="pagination-slider"
+      :auto-height="true"
     >
-      <swiper-slide>
-        <img src="../assets/banner.jpg" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="../assets/banner.jpg" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="../assets/banner.jpg" />
+      <swiper-slide v-for="banner in props.banners">
+        <img :src="banner.src" />
       </swiper-slide>
     </swiper>
   </section>
 </template>
+<script setup>
+import { defineProps } from 'vue';
+const props = defineProps(['banners']);
+</script>
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import SwiperCore, { Pagination } from 'swiper/core';
 // Import Swiper styles
 import 'swiper/swiper.min.css';
+
 // import 'swiper/modules/pagination/pagination.min.css';
+
 SwiperCore.use([Pagination]);
 export default {
   components: {
@@ -69,17 +70,20 @@ export default {
   opacity: 1;
 }
 .banners .swiper-slide-prev,
-.banners .swiper-slide-next{
-  opacity: .5;
+.banners .swiper-slide-next {
+  opacity: 0.5;
 }
-.banners .swiper-slide-active{
+.banners .swiper-slide-active {
   opacity: 1;
 }
 .banners .swiper-slide,
 .banners .swiper-slide-active,
 .banners .swiper-slide-prev,
-.banners .swiper-slide-next{
+.banners .swiper-slide-next {
   overflow: hidden;
+}
+.banners .swiper-slide{
+  max-height: 70vh;
 }
 .banners .swiper-slide img,
 .banners .swiper-slide-active img,
@@ -88,9 +92,10 @@ export default {
   width: 100%;
   max-height: 100%;
   object-fit: cover;
+  object-position: center;
 }
-@media(max-width: 768px){
-  .banners{
+@media (max-width: 768px) {
+  .banners {
     margin: 0 5% 53px;
     max-height: 400px;
   }

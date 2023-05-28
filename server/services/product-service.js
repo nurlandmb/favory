@@ -89,7 +89,8 @@ class ProductService {
     return productDto;
   }
   async delete(id) {
-    const product = await ProductModel.deleteOne(id);
+    const product = await ProductModel.deleteOne({_id: id});
+  
     if (!product) {
       throw ApiError.BadRequest('Товар не найден');
     } else {

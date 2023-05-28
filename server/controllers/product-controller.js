@@ -22,7 +22,7 @@ class ProductController {
     res.send(product);
   }
   async delete(req, res) {
-    console.log(req.body.id);
+    console.log(req.body);
     const result = await productService.delete(req.body.id);
     res.send(result);
   }

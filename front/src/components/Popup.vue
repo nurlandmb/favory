@@ -2,8 +2,7 @@
 import { watch } from 'vue';
 import MobileLinks from './MobileLinks.vue';
 const props = defineProps(['active', 'product']);
-const emits = defineEmits(['close'])
-console.log(props.product);
+const emits = defineEmits(['close']);
 </script>
 <template>
   <div
@@ -49,17 +48,31 @@ console.log(props.product);
       </div>
       <div class="popup__content">
         <h3 class="popup__title">{{ props.product.title }}</h3>
-        <p class="popup__code">{{ props.product.sku }}</p>
+        <p class="popup__code">Код товара: {{ props.product.sku }}</p>
         <p class="popup__info">Характеристики</p>
         <ul class="popup__list">
-          <li class="popup__list-item"><span>Вес</span>{{ props.product.info.weight }}</li>
-          <li class="popup__list-item"><span>Вставка</span>{{ props.product.info.setting }}</li>
-          <li class="popup__list-item"><span>Металл</span>{{ props.product.info.metal }}</li>
-          <li class="popup__list-item"><span>Проба</span>{{ props.product.info.content }}</li>
-          <li class="popup__list-item"><span>Коллекция</span>{{ props.product.info.collection }}</li>
-          <li class="popup__list-item"><span>Гарантия</span>{{ props.product.info.warranty }}</li>
+          <li class="popup__list-item">
+            <span>Вес</span>{{ props.product.info.weight }}
+          </li>
+          <li class="popup__list-item">
+            <span>Вставка</span>{{ props.product.info.setting }}
+          </li>
+          <li class="popup__list-item">
+            <span>Металл</span>{{ props.product.info.metal }}
+          </li>
+          <li class="popup__list-item">
+            <span>Проба</span>{{ props.product.info.content }}
+          </li>
+          <li class="popup__list-item">
+            <span>Коллекция</span>{{ props.product.info.collection }}
+          </li>
+          <li class="popup__list-item">
+            <span>Гарантия</span>{{ props.product.info.warranty }}
+          </li>
         </ul>
-        <p class="popup__price">Цена: {{ props.product.price.toLocaleString('ru-RU') }} ₸</p>
+        <p class="popup__price">
+          Цена: {{ props.product.price.toLocaleString('ru-RU') }} ₸
+        </p>
       </div>
     </div>
     <MobileLinks inpopup="true" @click.stop />
@@ -110,6 +123,7 @@ console.log(props.product);
   transition: all 0.3s;
 }
 .popup {
+  font-family: 'Sen', Calibri, sans-serif;
   position: relative;
   padding: 36px 79px 50px 27px;
   background-color: #fff;
@@ -127,13 +141,14 @@ console.log(props.product);
   background: transparent;
   border: none;
 }
-.popup__img{
+.popup__img {
   flex: 0 0 50%;
 }
-.popup__img img{
+.popup__img img {
   max-width: 100%;
+  border-radius: 15px;
 }
-.popup__content{
+.popup__content {
   flex: 0 0 45%;
 }
 .popup__title {
@@ -142,8 +157,7 @@ console.log(props.product);
   margin-bottom: 15px;
 }
 .popup__code {
-  font-family: 'Avenir', sans-serif;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 16px;
   text-transform: uppercase;
   padding-bottom: 19px;
@@ -152,9 +166,8 @@ console.log(props.product);
   margin-bottom: 20px;
 }
 .popup__info {
-  font-family: 'Avenir', sans-serif;
-  font-weight: 900;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 20px;
   text-transform: uppercase;
   color: #000;
   margin-bottom: 19px;
@@ -168,16 +181,14 @@ console.log(props.product);
 .popup__list-item {
   display: flex;
   align-items: center;
-  font-family: 'Avenir', sans-serif;
   justify-content: space-between;
+  font-size: 18px;
 }
 .popup__list-item span {
-  font-weight: 900;
-  font-size: 14px;
+  font-weight: 700;
   color: #adadad;
 }
 .popup__price {
-  font-family: 'Avenir', sans-serif;
   font-size: 24px;
   text-transform: uppercase;
   color: #000000;
@@ -200,7 +211,7 @@ console.log(props.product);
     align-items: stretch;
   }
   .popup__content,
-  .popup__img{
+  .popup__img {
     flex: 0 0 100%;
   }
   .popup img {
@@ -217,8 +228,6 @@ console.log(props.product);
   .popup__title {
     font-size: 24px;
   }
-  .popup__info {
-    font-size: 14px;
-  }
+  
 }
 </style>

@@ -3,6 +3,7 @@ import './index.css';
 import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Main from './views/Main.vue';
+import $api from './https/index'
 const routes = [
   {
     path: '/login',
@@ -13,14 +14,19 @@ const routes = [
     path: '/products',
     name: 'Products',
     component: () => import('./views/Products.vue'),
-    // beforeEnter: (to, from, next) => {
-    //   if(!localStorage.getItem('favory-token')){
-    //     console.log("chort")
-    //     next('login')
-    //   }else{
-    //     next();
-    //   }
-    // },
+    beforeEnter: async (to, from, next) => {
+      try {
+        const response = await $api.get(`/refresh`, {
+          withCredentials: true,
+        });
+        localStorage.setItem('favory-token', response.data.accessToken);
+        return next();
+      } catch (error) {
+        console.log(error);
+        localStorage.removeItem('favory-token');
+        return next('/login')
+      }
+    },
   },
   {
     path: '/',

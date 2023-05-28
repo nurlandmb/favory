@@ -1,5 +1,9 @@
 <script setup>
 import { watch, ref } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+// Import Swiper styles
+import 'swiper/swiper.min.css';
+// import 'swiper/modules/pagination/pagination.min.css';
 
 const props = defineProps(['category']);
 const activeCategory = ref('all');
@@ -36,7 +40,35 @@ watch(activeCategory, (newVal) => {
         {{ subcategory }}
       </button>
     </nav>
-    <ul class="products__list">
+    <swiper
+      :breakpoints="{
+        320: { slidesPerView: 1.5, },
+        500: { slidesPerView: 2 },
+        768: { slidesPerView: 3 },
+        1100: { slidesPerView: 4 },
+      }"
+      space-between="30"
+      class="products__list"
+      :watch-overflow="true"
+      :autoplay="{ delay: 3000 }"
+    >
+      <swiper-slide
+        class="products__list-item product"
+        v-for="product in filteredProducts"
+      >
+        <button @click="$emit('openPopup', product)">
+          <div class="product__img">
+            <img :src="product.img.small" :alt="product.title" />
+          </div>
+
+          <h3 class="product__name">{{ product.title }}</h3>
+          <p class="product__price">
+            {{ product.price.toLocaleString('ru-RU') }} ₸
+          </p>
+        </button>
+      </swiper-slide>
+    </swiper>
+    <!-- <ul class="products__list">
       <li
         class="products__list-item product"
         v-for="product in filteredProducts"
@@ -53,12 +85,11 @@ watch(activeCategory, (newVal) => {
           </p>
         </button>
       </li>
-    </ul>
+    </ul> -->
   </section>
 </template>
 <style scoped>
 .products {
-  font-family: 'Avenir', sans-serif;
   max-width: 900px;
   width: 90%;
   margin: 0 auto;
@@ -73,17 +104,17 @@ watch(activeCategory, (newVal) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 118px;
+  margin-bottom: 70px;
 }
 .products__nav-btn {
   background: transparent;
   border: none;
   color: #adadad;
   text-transform: uppercase;
-  font-weight: 900;
+  font-weight: 400;
 }
 .products__nav-btn.active {
-  font-weight: 900;
+  font-weight: 700;
   color: var(--color-black);
 }
 .products__nav-btn:not(:last-child) {
@@ -95,8 +126,15 @@ watch(activeCategory, (newVal) => {
   list-style: none;
   gap: 20px;
 }
+.product {
+  padding: 20px 0;
+  overflow: visible;
+  min-width: 200px;
+  font-family: 'Sen', sans-serif;
+
+}
 .product:nth-child(even) {
-  transform: translateY(-40px);
+  /* transform: translateY(-40px); */
 }
 .product button {
   border: none;
@@ -109,7 +147,13 @@ watch(activeCategory, (newVal) => {
   margin-bottom: 18px;
   transition: transform 0.3s;
   max-width: 100%;
+  max-height: 300px;
+}
+.product__img img{
+  max-width: 100%;
   max-height: 100%;
+  object-fit: contain;
+  border-radius: 15px;
 }
 .product__name {
   font-weight: 400;
@@ -150,7 +194,7 @@ watch(activeCategory, (newVal) => {
     overflow: scroll hidden;
   }
   .product:nth-child(even) {
-    transform: translateY(-20px);
+    /* transform: translateY(-20px); */
   }
 }
 </style>

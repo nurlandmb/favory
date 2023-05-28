@@ -34,13 +34,13 @@ const start = async () => {
     app.listen(PORT, () => {
       console.log('Working on ' + PORT);
     });
-    const __dirname = path.resolve();
-    app.use(express.static(path.join(__dirname, '/front/dist')));
-    app.get('*', (req, res) =>
-      res.sendFile(path.join(__dirname, '/front/dist/index.html'))
-    );
+    // const __dirname = path.resolve();
+    // app.use(express.static(path.join(__dirname, '/front/dist')));
+    // app.get('*', (req, res) =>
+    //   res.sendFile(path.join(__dirname, '/front/dist/index.html'))
+    // );
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 start();

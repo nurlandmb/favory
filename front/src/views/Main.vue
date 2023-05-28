@@ -11,10 +11,20 @@ import $api from '../https';
 let isPopupActive = ref(false);
 let popupProduct = ref(null);
 let categories = ref();
+let banners = ref([]);
 const getProducts = async () => {
   try {
     const { data } = await $api.get('/byCategories');
     categories.value = data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+const getBanners = async () => {
+  try {
+    const { data } = await $api.get('/banner/all');
+    console.log(data);
+    banners.value = data;
   } catch (error) {
     console.log(error);
   }
@@ -24,7 +34,6 @@ const closePopup = () => {
   popupProduct.value = null;
 };
 const openPopup = (product) => {
-  console.log(product);
   popupProduct.value = product;
   isPopupActive.value = true;
 };
@@ -37,12 +46,13 @@ watch(isPopupActive, async (newStatus) => {
 });
 onMounted(() => {
   getProducts();
+  getBanners();
 });
 </script>
 <template>
   <Popup :active="isPopupActive" @close="closePopup" :product="popupProduct" />
   <Header />
-  <Banners />
+  <Banners :banners="banners" />
   <About />
 
   <CategoryProducts

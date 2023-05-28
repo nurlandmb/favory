@@ -118,14 +118,11 @@ async function submitHandler(e) {
     product.id = props.product.id;
   }
   try {
-    console.log(props.isEditing);
-    console.log(product);
     const url = props.isEditing ? '/edit' : '/create';
     const { data } = await $api.post(url, { product });
     props.loadProducts();
     closePopup();
     isLoading.value = false;
-    console.log('product created');
   } catch (error) {
     isLoading.value = false;
     console.log(error);
