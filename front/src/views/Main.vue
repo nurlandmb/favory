@@ -14,7 +14,7 @@ let categories = ref();
 let banners = ref([]);
 const getProducts = async () => {
   try {
-    const { data } = await $api.get('/byCategories');
+    const { data } = await $api.get('/api/byCategories');
     categories.value = data;
   } catch (error) {
     console.log(error);
@@ -22,7 +22,7 @@ const getProducts = async () => {
 };
 const getBanners = async () => {
   try {
-    const { data } = await $api.get('/banner/all');
+    const { data } = await $api.get('/api/banner/all');
     console.log(data);
     banners.value = data;
   } catch (error) {
