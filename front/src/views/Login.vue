@@ -21,7 +21,7 @@ const submitHandler = async () => {
     isValid.value = true;
   }
   try {
-    const res = await $api.post('http://localhost:5000/api/login', {
+    const res = await $api.post('/login', {
       email: email.value,
       password: password.value,
     });
