@@ -26,7 +26,7 @@ class UserService {
     if (!user) {
       throw ApiError.BadRequest('Аккаунт не найден!');
     }
-    const isPassEqual = bcrypt.compare(password, user.password);
+    const isPassEqual = await bcrypt.compare(password, user.password);
     if (!isPassEqual) {
       throw ApiError.BadRequest('Неправильный пароль!');
     }

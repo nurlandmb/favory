@@ -29,8 +29,9 @@ const submitHandler = async () => {
     router.push('/products');
   } catch (err) {
     isLoading.value = false;
+    const errMsg = err.response.data.message || 'Произошла ошибка. Пожалуйста, попробуйте снова'
     console.log(err);
-    alert('Произошла ошибка. Пожалуйста, попробуйте снова');
+    alert(errMsg);
   }
 };
 </script>

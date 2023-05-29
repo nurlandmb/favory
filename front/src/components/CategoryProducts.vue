@@ -212,34 +212,34 @@ export default {
     max-width: 100vw;
     overflow: hidden;
   }
-  .products__nav {
+  .products .products__nav {
     overflow: scroll hidden;
     justify-content: start;
     padding: 0 32px;
     margin-bottom: 44px;
   }
-  .products__nav::-webkit-scrollbar,
-  .products__list::-webkit-scrollbar {
+  .products .products__nav::-webkit-scrollbar,
+  .products .products__list::-webkit-scrollbar {
     display: none;
   }
 
   /* Hide scrollbar for IE, Edge and Firefox */
-  .products__nav,
-  .products__list {
+  .products .products__nav,
+  .products .products__list {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .products__nav-btn {
+  .products .products__nav-btn {
     white-space: nowrap;
   }
-  .products__title {
+  .products .products__title {
     margin-bottom: 28px;
   }
-  .products__list {
+  .products .products__list {
     padding: 20px 32px 0;
-    overflow: scroll hidden;
+    /* overflow: scroll hidden; */
   }
-  .products .product:nth-child(even) {
+  .products .products .product:nth-child(even) {
     /* transform: translateY(-20px); */
   }
 }

@@ -131,7 +131,7 @@ onMounted(() => {
         </div>
       </div>
     </header>
-    <section class="products">
+    <section class="admin-products">
       <div class="container">
         <div class="top">
           <h2 class="top__title">Все товары</h2>
@@ -165,7 +165,7 @@ onMounted(() => {
         </div>
       </div>
     </section>
-    <section class="banners">
+    <section class="admin-banners">
       <div class="container">
         <div class="top">
           <h2 class="top__title">Все Баннеры</h2>
