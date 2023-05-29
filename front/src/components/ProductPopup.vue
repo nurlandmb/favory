@@ -72,7 +72,7 @@ function validateInputs() {
   if (!warranty.value) {
     return { valid: false, msg: 'Гарантия не найдена' };
   }
-  return {valid: true};
+  return { valid: true };
 }
 function closePopup() {
   img.value = '';
@@ -124,6 +124,7 @@ async function submitHandler(e) {
     closePopup();
     isLoading.value = false;
   } catch (error) {
+    alert('Произошла ошибка. Пожалуйста, попробуйте снова');
     isLoading.value = false;
     console.log(error);
   }
@@ -140,6 +141,7 @@ async function imgUploadHandler(e) {
     img.value = data;
     isImgLoading.value = false;
   } catch (err) {
+    alert('Произошла ошибка. Пожалуйста, попробуйте снова');
     console.log(err);
     isImgLoading.value = false;
   }
@@ -243,7 +245,7 @@ async function imgUploadHandler(e) {
       </label>
       <label class="form__item">
         <span class="form__span">Проба</span>
-        <input v-model="content" type="text" class="form__input" />
+        <input v-model="content" type="number" class="form__input" />
       </label>
       <label class="form__item">
         <span class="form__span">Коллекция</span>
@@ -339,6 +341,7 @@ async function imgUploadHandler(e) {
 }
 .form__item {
   position: relative;
+  display: block;
 }
 .form__file {
   display: none;
@@ -400,6 +403,7 @@ async function imgUploadHandler(e) {
   display: inline-block;
   text-align: center;
   box-shadow: 0px 0 12px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 .form__span + .form__input {
   padding: 10px 10px 10px 140px;

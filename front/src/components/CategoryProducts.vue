@@ -1,9 +1,5 @@
 <script setup>
 import { watch, ref } from 'vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-// Import Swiper styles
-import 'swiper/swiper.min.css';
-// import 'swiper/modules/pagination/pagination.min.css';
 
 const props = defineProps(['category']);
 const activeCategory = ref('all');
@@ -19,6 +15,33 @@ watch(activeCategory, (newVal) => {
     );
   }
 });
+</script>
+<script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import SwiperCore, { Pagination } from 'swiper/core';
+// Import Swiper styles
+import 'swiper/swiper.min.css';
+
+// import 'swiper/modules/pagination/pagination.min.css';
+
+SwiperCore.use([Pagination]);
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  data() {
+    return {
+      pagination: {
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + '"></span>';
+        },
+      },
+    };
+  },
+};
 </script>
 <template>
   <section class="products">
@@ -42,11 +65,12 @@ watch(activeCategory, (newVal) => {
     </nav>
     <swiper
       :breakpoints="{
-        320: { slidesPerView: 1.5, },
+        320: { slidesPerView: 1.5 },
         500: { slidesPerView: 2 },
         768: { slidesPerView: 3 },
         1100: { slidesPerView: 4 },
       }"
+      :pagination="pagination"
       space-between="30"
       class="products__list"
       :watch-overflow="true"
@@ -68,6 +92,8 @@ watch(activeCategory, (newVal) => {
         </button>
       </swiper-slide>
     </swiper>
+    <div class="swiper-pagination"></div>
+
     <!-- <ul class="products__list">
       <li
         class="products__list-item product"
@@ -88,7 +114,7 @@ watch(activeCategory, (newVal) => {
     </ul> -->
   </section>
 </template>
-<style scoped>
+<style>
 .products {
   max-width: 900px;
   width: 90%;
@@ -104,7 +130,7 @@ watch(activeCategory, (newVal) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
 }
 .products__nav-btn {
   background: transparent;
@@ -112,6 +138,10 @@ watch(activeCategory, (newVal) => {
   color: #adadad;
   text-transform: uppercase;
   font-weight: 400;
+  transition: color 0.3s;
+}
+.products__nav-btn:hover {
+  color: var(--color-black);
 }
 .products__nav-btn.active {
   font-weight: 700;
@@ -121,41 +151,57 @@ watch(activeCategory, (newVal) => {
   margin-right: 37px;
 }
 .products__list {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(200px, 1fr));
   list-style: none;
   gap: 20px;
 }
-.product {
+.products .swiper-pagination {
+  text-align: center;
+}
+.products .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  background: var(--color-black);
+  opacity: 0.2;
+  transition: all 0.3s;
+  border-radius: 14px;
+  margin: 0 6px;
+  cursor: pointer;
+}
+.products .swiper-pagination-bullet-active {
+  width: 16px;
+  height: 6px;
+  opacity: 1;
+}
+.products .product {
   padding: 20px 0;
   overflow: visible;
   min-width: 200px;
   font-family: 'Sen', sans-serif;
-
 }
-.product:nth-child(even) {
+.products .product:nth-child(even) {
   /* transform: translateY(-40px); */
 }
-.product button {
+.products .product button {
   border: none;
   background: transparent;
 }
-.product:hover .product__img {
+.products .product:hover .product__img {
   transform: scale(1.1);
 }
-.product__img {
+.products .product__img {
   margin-bottom: 18px;
   transition: transform 0.3s;
   max-width: 100%;
   max-height: 300px;
 }
-.product__img img{
+.products .product__img img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   border-radius: 15px;
 }
-.product__name {
+.products .product__name {
   font-weight: 400;
   margin-bottom: 2px;
   font-size: 16px;
@@ -193,7 +239,7 @@ watch(activeCategory, (newVal) => {
     padding: 20px 32px 0;
     overflow: scroll hidden;
   }
-  .product:nth-child(even) {
+  .products .product:nth-child(even) {
     /* transform: translateY(-20px); */
   }
 }

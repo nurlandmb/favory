@@ -13,11 +13,11 @@ const submitHandler = async () => {
   isLoading.value = true;
   const emailVal = email.value.trim();
   const passwordVal = password.value.trim();
-  if(!emailVal || !passwordVal){
+  if (!emailVal || !passwordVal) {
     isValid.value = false;
     isLoading.value = false;
     return;
-  }else{
+  } else {
     isValid.value = true;
   }
   try {
@@ -30,6 +30,7 @@ const submitHandler = async () => {
   } catch (err) {
     isLoading.value = false;
     console.log(err);
+    alert('Произошла ошибка. Пожалуйста, попробуйте снова');
   }
 };
 </script>
@@ -49,7 +50,9 @@ const submitHandler = async () => {
           <button></button>
         </label>
         <button class="form-submit" :disabled="isLoading">Войти</button>
-        <p class="form-wrong" :class="{active: !isValid}">Заполните все поля</p>
+        <p class="form-wrong" :class="{ active: !isValid }">
+          Заполните все поля
+        </p>
       </form>
     </div>
   </section>
@@ -64,7 +67,7 @@ const submitHandler = async () => {
   min-height: 100vh;
   background: #f1efea;
 }
-.wrapper{
+.wrapper {
   background: #fff;
   border-radius: 5px;
   text-align: center;
@@ -86,9 +89,8 @@ const submitHandler = async () => {
   /* box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.2); */
   border: 2px solid #72a479;
   color: #72a479;
-
 }
-.form-item input::placeholder{
+.form-item input::placeholder {
   color: #72a479;
 }
 .form-submit {
@@ -106,21 +108,20 @@ const submitHandler = async () => {
   color: #72a479;
   background-color: #fff;
 }
-.form-submit:disabled{
-  opacity: .5;
+.form-submit:disabled {
+  opacity: 0.5;
   pointer-events: none;
 }
-.form-wrong{
+.form-wrong {
   margin-top: 10px;
   color: #cc0033;
   font-size: 16px;
   opacity: 0;
   visibility: hidden;
-  transition: all .2s;
+  transition: all 0.2s;
 }
-.form-wrong.active{
+.form-wrong.active {
   opacity: 1;
   visibility: visible;
 }
-
 </style>

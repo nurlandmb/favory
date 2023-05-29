@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue';
+import { ref } from 'vue';
 import Address from './Address.vue';
 import Contacts from './Contacts.vue';
 import Socials from './Socials.vue';
@@ -9,7 +9,10 @@ let isBurgerActive = ref(false);
   <header class="header">
     <div class="container">
       <div class="wrapper">
-        <a href="#" class="whatsapp">
+        <a
+          href="https://api.whatsapp.com/send/?phone=77777778050&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5.+%D0%A0%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5+%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5+%D0%BF%D1%80%D0%BE+%D1%8E%D0%B2%D0%B5%D0%BB%D0%B8%D1%80%D0%BD%D1%8B%D0%B5+%D1%83%D0%BA%D1%80%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D1%8F+Favory&type=phone_number&app_absent=0"
+          class="whatsapp"
+        >
           <svg
             width="26"
             height="26"
@@ -43,12 +46,16 @@ let isBurgerActive = ref(false);
             <img src="../assets/logo.svg" />
           </a>
         </div>
-        <button class="burger" :class="{active: isBurgerActive}" @click="() => isBurgerActive = !isBurgerActive">
+        <button
+          class="burger"
+          :class="{ active: isBurgerActive }"
+          @click="() => (isBurgerActive = !isBurgerActive)"
+        >
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <div class="burger__content" :class="{active: isBurgerActive}">
+        <div class="burger__content" :class="{ active: isBurgerActive }">
           <Address class="" />
           <Contacts class="" />
           <Socials class="" />
@@ -88,9 +95,9 @@ let isBurgerActive = ref(false);
   text-transform: uppercase;
   font-size: 14px;
   border: 1px solid var(--color-black);
-  transition: all .2s;
+  transition: all 0.2s;
 }
-.mobile:hover{
+.mobile:hover {
   background-color: #fff;
   color: var(--color-black);
 }
@@ -147,15 +154,15 @@ let isBurgerActive = ref(false);
     height: 3px;
     background-color: #000;
     margin-bottom: 5px;
-    transition: all .3s;
+    transition: all 0.3s;
   }
-  .burger.active span:first-child{
+  .burger.active span:first-child {
     transform: translateY(8px) rotate(45deg);
   }
-  .burger.active span:nth-child(2){
+  .burger.active span:nth-child(2) {
     transform: scale(0);
   }
-  .burger.active span:last-child{
+  .burger.active span:last-child {
     transform: translateY(-8px) rotate(-45deg);
   }
   .logo {
@@ -179,9 +186,9 @@ let isBurgerActive = ref(false);
     visibility: hidden;
     z-index: 2;
     transform: translateY(-40px);
-    transition: all .2s;
+    transition: all 0.2s;
   }
-  .burger__content.active{
+  .burger__content.active {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;

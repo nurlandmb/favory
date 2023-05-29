@@ -7,7 +7,6 @@ class BannerService {
     return banners;
   }
   async create(src) {
-    console.log('src  ', src)
     const banner = await bannerModel.create({
       src,
     });

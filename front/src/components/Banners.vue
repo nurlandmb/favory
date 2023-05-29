@@ -1,6 +1,5 @@
 <template>
   <section class="banners">
-    <div class="swiper-pagination"></div>
     <swiper
       :breakpoints="{ 600: { slidesPerView: 1 }, 900: { slidesPerView: 1.2 } }"
       space-between="30"
@@ -84,13 +83,14 @@ export default {
 }
 .banners .swiper-slide{
   max-height: 70vh;
+  height: 100%;
 }
 .banners .swiper-slide img,
 .banners .swiper-slide-active img,
 .banners .swiper-slide-prev img,
 .banners .swiper-slide-next img {
   width: 100%;
-  max-height: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }

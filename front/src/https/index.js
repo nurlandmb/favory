@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_URL = process.env.VUE_APP_CLIENT_URL;
+export const API_URL = '/api';
 
 const $api = axios.create({
   withCredentials: true,
