@@ -8,14 +8,13 @@ const errorMiddleware = require('./middleware/error-middleware');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const app = express();
-console.log(process.env.CLIENT_URL)
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
     // origin: false,
-    origin: process.env.CLIENT_URL,
+    origin: 'http://195.49.210.235:5000',
   })
 );
 app.use('/api', router);
@@ -24,10 +23,13 @@ app.use(errorMiddleware);
 const start = async () => {
   try {
     await mongoose
-      .connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
+      .connect(
+        'mongodb+srv://almatyfavory:i8zUmtBU3Bo0PYab@cluster0.ndkoj2g.mongodb.net/?retryWrites=true&w=majority',
+        {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        }
+      )
       .then((e) => console.log('Connected successfully'))
       .catch((e) => console.log(e));
 

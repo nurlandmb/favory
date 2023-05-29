@@ -7,9 +7,9 @@ const ApiError = require('../exceptions/api-error');
 class ProductService {
   async imgUpload(buffer) {
     v2.config({
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret: process.env.CLOUDINARY_API_SECRET,
+      cloud_name: 'defwppzro',
+      api_key: '782986186827593',
+      api_secret: '5EI4mtLmRlXpjeu_tAVkCnDXyXo',
     });
     const streamUpload = (buffer) => {
       return new Promise((resolve, reject) => {
