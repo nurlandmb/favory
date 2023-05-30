@@ -5,6 +5,8 @@ import $api from '../https';
 const props = defineProps(['active', 'product', 'isEditing', 'loadProducts']);
 const emit = defineEmits(['close']);
 const categories = ref([]);
+const isCategoriesFillActive = ref(false);
+const isSubCategoriesFillActive = ref(false);
 const subCategories = ref([]);
 const img = ref('');
 const title = ref('');
@@ -158,6 +160,15 @@ async function imgUploadHandler(e) {
     isImgLoading.value = false;
   }
 }
+function closeAutofill(type) {
+  setTimeout(() => {
+    if (type === 'category') {
+      isCategoriesFillActive.value = false;
+    } else {
+      isSubCategoriesFillActive.value = false;
+    }
+  }, 100);
+}
 onMounted(() => {
   getCategories();
   getSubcategories();
@@ -241,8 +252,20 @@ onMounted(() => {
       </label>
       <label class="form__item">
         <span class="form__span"> Категория </span>
-        <input v-model="category" class="form__input" type="text" />
-        <ul class="form__autofill">
+        <input
+          v-model="category"
+          class="form__input"
+          type="text"
+          @focus="() => (isCategoriesFillActive = true)"
+          @click="() => (isCategoriesFillActive = true)"
+          @blur="() => closeAutofill('category')"
+        />
+        <ul
+          class="form__autofill"
+          :class="{
+            active: isCategoriesFillActive,
+          }"
+        >
           <li
             class="form__autofill-item"
             v-for="categoryItem in categories.filter((item) =>
@@ -253,7 +276,11 @@ onMounted(() => {
           >
             <button
               type="button"
-              @click.native="() => (category = categoryItem)"
+              @click.stop="
+                () => {
+                  category = categoryItem;
+                }
+              "
             >
               {{ categoryItem }}
             </button>
@@ -262,8 +289,17 @@ onMounted(() => {
       </label>
       <label class="form__item">
         <span class="form__span"> Подкатегория </span>
-        <input v-model="subcategory" type="text" class="form__input" />
-        <ul class="form__autofill">
+        <input
+          v-model="subcategory"
+          @focus="() => (isSubCategoriesFillActive = true)"
+          @click="() => (isSubCategoriesFillActive = true)"
+          @blur="() => closeAutofill('subcategory')"
+          type="text"
+          class="form__input"
+        />
+        <ul class="form__autofill" :class="{
+          active: isSubCategoriesFillActive
+        }">
           <li
             class="form__autofill-item"
             v-for="subCategoryItem in subCategories.filter((item) =>
@@ -274,7 +310,7 @@ onMounted(() => {
           >
             <button
               type="button"
-              @click.native="() => (subcategory = subCategoryItem)"
+              @click="() => (subcategory = subCategoryItem)"
             >
               {{ subCategoryItem }}
             </button>
@@ -455,7 +491,7 @@ onMounted(() => {
   box-shadow: 0px 0 12px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-.form__input:focus ~ .form__autofill {
+.form__autofill.active {
   opacity: 1;
   visibility: visible;
 }
@@ -469,7 +505,7 @@ onMounted(() => {
   width: calc(100% - 140px);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.1s;
+  transition: all 0.2s;
   max-height: 150px;
   overflow: hidden scroll;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
