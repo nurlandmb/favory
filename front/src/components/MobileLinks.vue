@@ -6,7 +6,7 @@ const props = defineProps(['inpopup']);
     <div class="mobile__logo">
       <img src="../assets/logo.svg" alt="" />
     </div>
-    <img class="mobile__img" src="../assets/phone.png" alt="" />
+    <img class="mobile__img" src="../assets/phone.webp" alt="" />
     <div class="mobile__content">
       <p class="mobile__text">
         Заказывай ювелирные изделия через мобильное приложение Favory!
@@ -27,11 +27,11 @@ const props = defineProps(['inpopup']);
   </section>
 </template>
 <style scoped>
-@keyframes rotate{
-  from{
+@keyframes rotate {
+  from {
     transform: translateX(0);
   }
-  to{
+  to {
     transform: translateX(-30px) rotate(8deg);
   }
 }
@@ -53,7 +53,8 @@ const props = defineProps(['inpopup']);
   padding: 33px 17px;
   box-shadow: 0px 0px 60px rgba(194, 189, 180, 0.3);
 }
-.mobile__img{
+.mobile__img {
+  max-width: 560px;
   /* animation: rotate 2s ease-in-out 0s infinite both alternate; */
 }
 .popupMode .mobile__logo {
@@ -116,7 +117,7 @@ const props = defineProps(['inpopup']);
   }
 }
 @media (max-width: 768px) {
-  .popupMode{
+  .popupMode {
     border-radius: 0;
     /* margin: 0 -5%; */
   }
@@ -130,17 +131,17 @@ const props = defineProps(['inpopup']);
     left: auto;
     padding: 25px 13px;
   }
-  .popupMode .mobile__logo{
+  .popupMode .mobile__logo {
     left: auto;
   }
-  .popupMode .mobile__content{
+  .popupMode .mobile__content {
     margin-left: 0;
   }
   .mobile__logo img {
     width: 73px;
     height: 44px;
   }
-  .popupMode .mobile__img{
+  .popupMode .mobile__img {
     margin: 0 0 10px;
   }
   .mobile__img {

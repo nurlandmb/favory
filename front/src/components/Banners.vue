@@ -7,6 +7,10 @@
       :pagination="pagination"
       class="pagination-slider"
       :auto-height="false"
+      :loop="true"
+      :autoplay="{
+        delay: 3000
+      }"
     >
       <swiper-slide v-for="banner in props.banners">
         <img :src="banner.src" />
@@ -15,20 +19,18 @@
   </section>
 </template>
 <script setup>
-import { defineProps, watch } from 'vue';
 const props = defineProps(['banners']);
-
 </script>
 <script>
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue';
-import SwiperCore, { Pagination } from 'swiper/core';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import SwiperCore, { Pagination, Autoplay } from 'swiper/core';
 // Import Swiper styles
 import 'swiper/swiper.min.css';
 
 // import 'swiper/modules/pagination/pagination.min.css';
 
-SwiperCore.use([Pagination]);
+SwiperCore.use([Pagination, Autoplay]);
 export default {
   components: {
     Swiper,
@@ -88,7 +90,7 @@ export default {
 .banners .swiper-slide-next {
   overflow: hidden;
 }
-.banners .swiper-slide{
+.banners .swiper-slide {
   max-height: 70vh;
   height: auto;
 }

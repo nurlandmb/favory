@@ -28,7 +28,6 @@ const getProducts = async () => {
 const getBanners = async () => {
   try {
     const { data } = await $api.get('/banner/all');
-    console.log(data);
     banners.value = data;
     isBannersLoading.value = false;
   } catch (error) {
