@@ -16,7 +16,7 @@ app.use(
   cors({
     credentials: true,
     // origin: false,
-    origin: dev,
+    origin: client,
   })
 );
 app.use('/api', router);
