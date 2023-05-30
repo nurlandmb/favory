@@ -13,7 +13,7 @@ function closePopup() {
 async function submitHandler(e) {
   const val = img.value
   if(!val.trim()){
-    alert('Изображение не выбрано');
+    return alert('Изображение не выбрано');
   }
   isLoading.value = true;
   try {
