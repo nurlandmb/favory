@@ -245,14 +245,16 @@ onMounted(() => {
         <ul class="form__autofill">
           <li
             class="form__autofill-item"
-            @click="() => (category = categoryItem)"
             v-for="categoryItem in categories.filter((item) =>
               item
                 .toLowerCase()
                 .startsWith(category ? category.toLowerCase() : '')
             )"
           >
-            <button type="button">
+            <button
+              type="button"
+              @click.native="() => (category = categoryItem)"
+            >
               {{ categoryItem }}
             </button>
           </li>
@@ -264,14 +266,16 @@ onMounted(() => {
         <ul class="form__autofill">
           <li
             class="form__autofill-item"
-            @click="() => (subcategory = subCategoryItem)"
             v-for="subCategoryItem in subCategories.filter((item) =>
               item
                 .toLowerCase()
                 .startsWith(subcategory ? subcategory.toLowerCase() : '')
             )"
           >
-            <button type="button">
+            <button
+              type="button"
+              @click.native="() => (subcategory = subCategoryItem)"
+            >
               {{ subCategoryItem }}
             </button>
           </li>
