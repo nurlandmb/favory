@@ -1,6 +1,24 @@
 const productService = require('../services/product-service');
 
 class ProductController {
+  async getCategories(req, res, next) {
+    try {
+      const categories = await productService.getCategories();
+      res.send(categories);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+  async getSubcategories(req, res, next) {
+    try {
+      const subCategories = await productService.getSubcategories();
+      res.send(subCategories);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
   async imgUpload(req, res, next) {
     try {
       const imgLink = await productService.imgUpload(req.file.buffer);

@@ -27,22 +27,7 @@ router.post('/banner/create', AuthMiddleware, bannerController.create);
 router.post('/banner/delete', AuthMiddleware, bannerController.delete);
 router.get('/banner/all', bannerController.getAll);
 router.get('/byCategories', productController.getByCategories);
-// router.post(
-//   '/todo/create',
-//   AuthMiddleware,
-//   body('title').isString(),
-//   body('content').isString(),
-//   body('author').isString(),
-//   body('date').isString(),
-//   body('category').isString(),
-//   body('completed').isBoolean(),
-//   todoController.create
-// );
-// router.post('/todo/edit', AuthMiddleware, todoController.edit);
-// router.post(
-//   '/todo/delete',
-//   AuthMiddleware,
-//   body('id').isString(),
-//   todoController.delete
-// );
+router.get('/allCategories', productController.getCategories);
+router.get('/allSubCategories', productController.getSubcategories);
+
 module.exports = router;

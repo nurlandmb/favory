@@ -5,6 +5,14 @@ const streamifier = require('streamifier');
 const ApiError = require('../exceptions/api-error');
 
 class ProductService {
+  async getCategories(){
+    const categories = await ProductModel.distinct('category');
+    return categories;
+  }
+  async getSubcategories(){
+    const subCategories = await ProductModel.distinct('subcategory');
+    return subCategories;
+  }
   async imgUpload(buffer) {
     v2.config({
       cloud_name: 'defwppzro',

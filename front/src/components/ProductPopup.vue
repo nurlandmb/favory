@@ -1,22 +1,25 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import $api from '../https';
-let props = defineProps(['active', 'product', 'isEditing', 'loadProducts']);
-let emit = defineEmits(['close']);
-let img = ref('');
-let title = ref('');
-let sku = ref('');
-let price = ref('');
-let category = ref('');
-let subcategory = ref('');
-let weight = ref('');
-let setting = ref('');
-let metal = ref('');
-let content = ref('');
-let collection = ref('');
-let warranty = ref('');
-let isLoading = ref(false);
-let isImgLoading = ref(false);
+
+const props = defineProps(['active', 'product', 'isEditing', 'loadProducts']);
+const emit = defineEmits(['close']);
+const categories = ref([]);
+const subCategories = ref([]);
+const img = ref('');
+const title = ref('');
+const sku = ref('');
+const price = ref('');
+const category = ref('');
+const subcategory = ref('');
+const weight = ref('');
+const setting = ref('');
+const metal = ref('');
+const content = ref('');
+const collection = ref('');
+const warranty = ref('');
+const isLoading = ref(false);
+const isImgLoading = ref(false);
 watch(
   () => props.product,
   () => {
@@ -88,6 +91,14 @@ function closePopup() {
   warranty.value = '';
   emit('close');
 }
+async function getCategories() {
+  const { data } = await $api.get('/allCategories');
+  categories.value = data;
+}
+async function getSubcategories() {
+  const { data } = await $api.get('/allSubCategories');
+  subCategories.value = data;
+}
 async function submitHandler(e) {
   isLoading.value = true;
   const isValid = validateInputs();
@@ -97,22 +108,22 @@ async function submitHandler(e) {
     return alert(isValid.msg);
   }
   const product = {
-    title: title.value,
-    sku: sku.value,
-    price: price.value,
-    category: category.value,
-    subcategory: subcategory.value,
+    title: title.value.trim(),
+    sku: sku.value.trim(),
+    price: price.value.trim(),
+    category: category.value.trim(),
+    subcategory: subcategory.value.trim(),
     img: {
       small: img.value,
       full: img.value,
     },
     info: {
-      weight: weight.value,
-      setting: setting.value,
-      metal: metal.value,
-      content: content.value,
-      collection: collection.value,
-      warranty: warranty.value,
+      weight: weight.value.trim(),
+      setting: setting.value.trim(),
+      metal: metal.value.trim(),
+      content: content.value.trim(),
+      collection: collection.value.trim(),
+      warranty: warranty.value.trim(),
     },
   };
   if (props.isEditing) {
@@ -147,6 +158,10 @@ async function imgUploadHandler(e) {
     isImgLoading.value = false;
   }
 }
+onMounted(() => {
+  getCategories();
+  getSubcategories();
+});
 </script>
 <template>
   <div
@@ -227,10 +242,37 @@ async function imgUploadHandler(e) {
       <label class="form__item">
         <span class="form__span"> Категория </span>
         <input v-model="category" class="form__input" type="text" />
+        <ul class="form__autofill">
+          <li
+            class="form__autofill-item"
+            v-for="categoryItem in categories.filter((item) =>
+              item.toLowerCase().startsWith(category ? category.toLowerCase() : '')
+            )"
+          >
+            <button type="button" @click="() => (category = categoryItem)">
+              {{ categoryItem }}
+            </button>
+          </li>
+        </ul>
       </label>
       <label class="form__item">
         <span class="form__span"> Подкатегория </span>
         <input v-model="subcategory" type="text" class="form__input" />
+        <ul class="form__autofill">
+          <li
+            class="form__autofill-item"
+            v-for="subCategoryItem in subCategories.filter((item) =>
+              item.toLowerCase().startsWith(subcategory ? subcategory.toLowerCase() : '')
+            )"
+          >
+            <button
+              type="button"
+              @click="() => (subcategory = subCategoryItem)"
+            >
+              {{ subCategoryItem }}
+            </button>
+          </li>
+        </ul>
       </label>
       <label class="form__item">
         <span class="form__span">Вес</span>
@@ -257,7 +299,7 @@ async function imgUploadHandler(e) {
         <input v-model="warranty" type="text" class="form__input" />
       </label>
       <div></div>
-      <button class="form__submit" :disabled="isLoading">Отправить</button>
+      <button class="form__submit" :disabled="isLoading">Сохранить</button>
     </form>
   </div>
 </template>
@@ -405,6 +447,46 @@ async function imgUploadHandler(e) {
   text-align: center;
   box-shadow: 0px 0 12px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+}
+.form__input:focus ~ .form__autofill {
+  opacity: 1;
+  visibility: visible;
+}
+.form__autofill {
+  position: absolute;
+  top: 105%;
+  right: 0;
+  list-style: none;
+  padding: 0;
+  z-index: 3;
+  width: calc(100% - 140px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.1s;
+  max-height: 150px;
+  overflow: hidden scroll;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+.form__autofill::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.form__autofill {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.form__autofill-item button {
+  width: 100%;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
+  background: transparent;
+  background: #fff;
+  color: #000;
+  margin-bottom: 2px;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 1px solid #000;
 }
 .form__span + .form__input {
   padding: 10px 10px 10px 140px;
