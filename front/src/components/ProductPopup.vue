@@ -245,11 +245,14 @@ onMounted(() => {
         <ul class="form__autofill">
           <li
             class="form__autofill-item"
+            @click="() => (category = categoryItem)"
             v-for="categoryItem in categories.filter((item) =>
-              item.toLowerCase().startsWith(category ? category.toLowerCase() : '')
+              item
+                .toLowerCase()
+                .startsWith(category ? category.toLowerCase() : '')
             )"
           >
-            <button type="button" @click="() => (category = categoryItem)">
+            <button type="button">
               {{ categoryItem }}
             </button>
           </li>
@@ -261,14 +264,14 @@ onMounted(() => {
         <ul class="form__autofill">
           <li
             class="form__autofill-item"
+            @click="() => (subcategory = subCategoryItem)"
             v-for="subCategoryItem in subCategories.filter((item) =>
-              item.toLowerCase().startsWith(subcategory ? subcategory.toLowerCase() : '')
+              item
+                .toLowerCase()
+                .startsWith(subcategory ? subcategory.toLowerCase() : '')
             )"
           >
-            <button
-              type="button"
-              @click="() => (subcategory = subCategoryItem)"
-            >
+            <button type="button">
               {{ subCategoryItem }}
             </button>
           </li>
@@ -465,7 +468,7 @@ onMounted(() => {
   transition: all 0.1s;
   max-height: 150px;
   overflow: hidden scroll;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .form__autofill::-webkit-scrollbar {
   display: none;
@@ -478,7 +481,7 @@ onMounted(() => {
 }
 .form__autofill-item button {
   width: 100%;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
   background: transparent;
   background: #fff;
   color: #000;
