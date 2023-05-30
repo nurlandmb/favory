@@ -110,7 +110,7 @@ async function submitHandler(e) {
   const product = {
     title: title.value.trim(),
     sku: sku.value.trim(),
-    price: price.value.trim(),
+    price: price.value,
     category: category.value.trim(),
     subcategory: subcategory.value.trim(),
     img: {
@@ -121,7 +121,7 @@ async function submitHandler(e) {
       weight: weight.value.trim(),
       setting: setting.value.trim(),
       metal: metal.value.trim(),
-      content: content.value.trim(),
+      content: content.value,
       collection: collection.value.trim(),
       warranty: warranty.value.trim(),
     },
