@@ -26,14 +26,14 @@ class ProductService {
     const result = await streamUpload(buffer);
     return result;
   }
-  async getAll(){
+  async getAll() {
     const products = await ProductModel.find();
     const productDtos = products.map((product) => new ProductDto(product));
     return productDtos;
   }
   async getByCategories() {
     const products = await ProductModel.find();
-    const productDtos = products.map(product => new ProductDto(product));
+    const productDtos = products.map((product) => new ProductDto(product));
     const categories = await ProductModel.distinct('category');
     const subCategories = await ProductModel.distinct('subcategory');
     const readyProducts = categories.reduce((accumulator, category, i) => {
@@ -45,7 +45,7 @@ class ProductService {
             category,
             subCategories,
             productDtos
-          )
+          ),
         },
       ];
     }, []);
@@ -89,8 +89,8 @@ class ProductService {
     return productDto;
   }
   async delete(id) {
-    const product = await ProductModel.deleteOne({_id: id});
-  
+    const product = await ProductModel.deleteOne({ _id: id });
+
     if (!product) {
       throw ApiError.BadRequest('Товар не найден');
     } else {

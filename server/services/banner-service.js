@@ -2,8 +2,10 @@ const bannerModel = require('../models/banner-model');
 const BannerDto = require('../dtos/banner-dto');
 
 class BannerService {
-  async getAll(){
-    const banners = (await bannerModel.find()).map(banner => new BannerDto(banner));
+  async getAll() {
+    const banners = (await bannerModel.find()).map(
+      (banner) => new BannerDto(banner)
+    );
     return banners;
   }
   async create(src) {

@@ -22,37 +22,55 @@ class UserService {
     return { ...tokens, user: userDto };
   }
   async login(email, password) {
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      throw ApiError.BadRequest('Аккаунт не найден!');
+    try {
+      const user = await UserModel.findOne({ email });
+      if (!user) {
+        throw ApiError.BadRequest('Аккаунт не найден!');
+      }
+      const isPassEqual = await bcrypt.compare(password, user.password);
+      if (!isPassEqual) {
+        throw ApiError.BadRequest('Неправильный пароль!');
+      }
+      const userDto = new UserDto(user);
+      const tokens = tokenService.generateTokens({ ...userDto });
+      await tokenService.saveToken(userDto.id, tokens.refreshToken);
+      return { ...tokens, user: userDto };
+    } catch (error) {
+      throw ApiError.BadRequest(
+        'Что-то пошло не так. Пожалуйста, попробуйте снова'
+      );
     }
-    const isPassEqual = await bcrypt.compare(password, user.password);
-    if (!isPassEqual) {
-      throw ApiError.BadRequest('Неправильный пароль!');
-    }
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    return { ...tokens, user: userDto };
   }
   async logout(refreshToken) {
-    const token = await tokenService.removeToken(refreshToken);
-    return token;
+    try {
+      const token = await tokenService.removeToken(refreshToken);
+      return token;
+    } catch (error) {
+      throw ApiError.BadRequest(
+        'Что-то пошло не так. Пожалуйста, попробуйте снова'
+      );
+    }
   }
   async refresh(refreshToken) {
-    if (!refreshToken) {
-      throw ApiError.UnauthorizedError;
+    try {
+      if (!refreshToken) {
+        throw ApiError.UnauthorizedError;
+      }
+      const userData = tokenService.validateRefreshToken(refreshToken);
+      const tokenFromDb = await tokenService.findToken(refreshToken);
+      if (!userData || !tokenFromDb) {
+        throw ApiError.UnauthorizedError();
+      }
+      const user = await UserModel.findById(userData.id);
+      const userDto = new UserDto(user);
+      const tokens = tokenService.generateTokens({ ...userDto });
+      await tokenService.saveToken(userDto.id, tokens.refreshToken);
+      return { ...tokens, user: userDto };
+    } catch (error) {
+      throw ApiError.BadRequest(
+        'Что-то пошло не так. Пожалуйста, попробуйте снова'
+      );
     }
-    const userData = tokenService.validateRefreshToken(refreshToken);
-    const tokenFromDb = await tokenService.findToken(refreshToken);
-    if (!userData || !tokenFromDb) {
-      throw ApiError.UnauthorizedError();
-    }
-    const user = await UserModel.findById(userData.id);
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    return { ...tokens, user: userDto };
   }
 }
 

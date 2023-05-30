@@ -10,11 +10,13 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+const client = 'http://195.49.210.235:5000';
+const dev = 'http://localhost:5173';
 app.use(
   cors({
     credentials: true,
     // origin: false,
-    origin: 'http://195.49.210.235:5000',
+    origin: dev,
   })
 );
 app.use('/api', router);
@@ -42,7 +44,7 @@ const start = async () => {
       res.sendFile(path.join(__dirname, '/front/dist/index.html'))
     );
   } catch (e) {
-    // console.log(e);
+    console.log(e);
   }
 };
 start();

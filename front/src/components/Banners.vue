@@ -6,7 +6,7 @@
       :centered-slides="true"
       :pagination="pagination"
       class="pagination-slider"
-      :auto-height="true"
+      :auto-height="false"
     >
       <swiper-slide v-for="banner in props.banners">
         <img :src="banner.src" />
@@ -15,12 +15,13 @@
   </section>
 </template>
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, watch } from 'vue';
 const props = defineProps(['banners']);
+
 </script>
 <script>
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue';
 import SwiperCore, { Pagination } from 'swiper/core';
 // Import Swiper styles
 import 'swiper/swiper.min.css';
@@ -33,6 +34,12 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  // setup(){
+  //   const swiper = useSwiper();
+  //   return {
+  //     swiper
+  //   }
+  // },
   data() {
     return {
       pagination: {
@@ -83,7 +90,7 @@ export default {
 }
 .banners .swiper-slide{
   max-height: 70vh;
-  height: 100%;
+  height: auto;
 }
 .banners .swiper-slide img,
 .banners .swiper-slide-active img,

@@ -93,6 +93,7 @@ async function submitHandler(e) {
   const isValid = validateInputs();
   console.log(isValid);
   if (!isValid.valid) {
+    isLoading.value = false;
     return alert(isValid.msg);
   }
   const product = {

@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
-import axios from 'axios';
 import { useRouter } from 'vue-router';
 import ProductPopup from '../components/ProductPopup.vue';
 import $api from '../https';
@@ -92,17 +91,6 @@ async function getProducts() {
 async function getBanners() {
   const { data } = await $api.get('/banner/all');
   banners.value = data;
-}
-async function checkAuth() {
-  try {
-    const response = await $api.get(`/refresh`, {
-      withCredentials: true,
-    });
-    localStorage.setItem('favory-token', response.data.accessToken);
-  } catch (error) {
-    localStorage.removeItem('favory-token');
-    router.push('/login');
-  }
 }
 onMounted(() => {
   // checkAuth();
