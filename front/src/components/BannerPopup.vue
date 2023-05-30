@@ -11,8 +11,11 @@ function closePopup() {
   emit('close');
 }
 async function submitHandler(e) {
-  isLoading.value = true;
   const val = img.value
+  if(!val.trim()){
+    alert('Изображение не выбрано');
+  }
+  isLoading.value = true;
   try {
     const { data } = await $api.post('/banner/create', { src: val });
     await props.loadBanners();
