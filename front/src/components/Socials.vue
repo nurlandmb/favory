@@ -116,6 +116,7 @@
 @media (max-width: 768px) {
   .social__item {
     margin: 10px 10px 0 0;
+    visibility: visible;
   }
 }
 </style>
