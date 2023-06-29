@@ -3,7 +3,7 @@ const props = defineProps(['inpopup']);
 </script>
 <template>
   <section class="mobile" :class="{ popupMode: props.inpopup }">
-    <div class="mobile__logo">
+    <div v-if="props.inpopup" class="mobile__logo">
       <img src="../assets/logo.svg" alt="" />
     </div>
     <img class="mobile__img" src="../assets/phone.webp" alt="" />
@@ -54,7 +54,7 @@ const props = defineProps(['inpopup']);
   box-shadow: 0px 0px 60px rgba(194, 189, 180, 0.3);
 }
 .mobile__img {
-  max-width: 560px;
+  max-width: 450px;
   /* animation: rotate 2s ease-in-out 0s infinite both alternate; */
 }
 .popupMode .mobile__logo {
@@ -158,7 +158,7 @@ const props = defineProps(['inpopup']);
 }
 @media (max-width: 500px) {
   .mobile__img {
-    transform: translateX(-100px);
+    transform: translateX(-80px);
   }
   .mobile__links-item {
     flex: 0 0 48%;

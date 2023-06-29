@@ -82,7 +82,7 @@ export default {
       >
         <button @click="$emit('openPopup', product)">
           <div class="product__img">
-            <img :src="product.img.small" :alt="product.title" />
+            <img :src="product.images.find(img => img.isMain).src" :alt="product.title" />
           </div>
 
           <h3 class="product__name">{{ product.title }}</h3>

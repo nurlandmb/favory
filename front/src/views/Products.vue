@@ -29,16 +29,14 @@ watch(isBannerPopupActive, async (newStatus) => {
 });
 function closePopup() {
   isPopupEdit.value = false;
-  popupProduct.value = { info: {}, img: {} };
+  popupProduct.value = { info: {}, images: [] };
   isPopupActive.value = false;
 }
 
-function openPopup(product = { info: {}, img: {} }, edit = false) {
+function openPopup(product = { info: {}, images: [] }, edit = false) {
   if (edit) {
     isPopupEdit.value = true;
-    console.log('edit mode');
   }
-  console.log();
   popupProduct.value = product;
   isPopupActive.value = true;
 }
@@ -113,7 +111,7 @@ onMounted(() => {
       <div class="container">
         <div class="header__wrapper">
           <router-link to="/" class="logo">
-            <img src="../assets/logo.svg" alt="" />
+            <img src="../assets/logo-1.svg" alt="" />
           </router-link>
           <button class="header__logout" @click="logout">Выйти</button>
         </div>
@@ -129,8 +127,7 @@ onMounted(() => {
           <div v-for="product in products" class="product">
             <div class="product__img">
               <div class="product__category">{{ product.category }}</div>
-
-              <img :src="product.img.small" alt="" />
+              <img :src="product.images.find(el => el.isMain).src" alt="" />
             </div>
             <h3 class="product__title">
               {{ product.title }}

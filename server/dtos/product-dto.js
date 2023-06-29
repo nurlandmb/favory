@@ -13,7 +13,7 @@ class ProductDto {
     this.price = model.price;
     this.category = model.category;
     this.subcategory = model.subcategory;
-    this.img = model.img;
+    this.images = model.images;
     this.info = model.info;
     this.id = model._id;
   }

@@ -90,7 +90,7 @@ class ProductService {
     newProduct.price = product.price;
     newProduct.category = product.category;
     newProduct.subcategory = product.subcategory;
-    newProduct.img = product.img;
+    newProduct.images = product.images;
     newProduct.info = product.info;
     const updatedProduct = await newProduct.save();
     const productDto = new ProductDto(updatedProduct);

@@ -5,10 +5,7 @@ const ProductSchema = new Schema({
   price: { type: Number, required: true },
   category: { type: String, required: true },
   subcategory: { type: String, required: true },
-  img: {
-    small: { type: String, required: true },
-    full: { type: String, required: true },
-  },
+  images: [{ src: {type: String}, isMain: {type: Boolean, default: false} }],
   info: {
     weight: { type: String, required: true },
     setting: { type: String, required: true },
@@ -19,22 +16,25 @@ const ProductSchema = new Schema({
   },
 });
 
-const abc = {product: {
-  title: 'Ring',
-  sku: 'TA-432',
-  price: 400000,
-  category: 'Кольцо',
-  subcategory: 'Свадебное',
-  img: {
-    small: '',
-    full: '',
+const abc = {
+  product: {
+    title: 'Ring',
+    sku: 'TA-432',
+    price: 400000,
+    category: 'Кольцо',
+    subcategory: 'Свадебное',
+    img: {
+      small: '',
+      full: '',
+    },
+    info: {
+      weight: 5.5,
+      setting: 'Бриллиант',
+      metal: 'Золото',
+      content: 585,
+      collection: 'Лимитированное',
+      warranty: '1 год.',
+    },
   },
-  info: {
-    weight: 5.5,
-    setting: 'Бриллиант',
-    metal: 'Золото',
-    content: 585,
-    collection: 'Лимитированное',
-    warranty: '1 год.',
-  }}}
+};
 module.exports = model('Product', ProductSchema);

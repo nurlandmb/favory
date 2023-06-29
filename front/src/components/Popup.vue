@@ -4,6 +4,31 @@ import MobileLinks from './MobileLinks.vue';
 const props = defineProps(['active', 'product']);
 const emits = defineEmits(['close']);
 </script>
+<script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import SwiperCore, { Pagination } from 'swiper/core';
+// Import Swiper styles
+import 'swiper/swiper.min.css';
+import 'swiper/css/pagination';
+// import 'swiper/modules/pagination/pagination.min.css';
+
+SwiperCore.use([Pagination]);
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    return {
+      modules: [Pagination],
+    };
+  },
+  // data() {
+
+  // },
+};
+</script>
 <template>
   <div
     class="overflow"
@@ -43,9 +68,23 @@ const emits = defineEmits(['close']);
           />
         </svg>
       </button>
-      <div class="popup__img">
-        <img :src="props.product.img.full" alt="" />
-      </div>
+      <!-- <div class="popup__img"> -->
+      <swiper
+        space-between="30"
+        class="popup__img"
+        :pagination="{
+          clickable: true,
+        }"
+        slidesPerView="1"
+      >
+        <swiper-slide
+          class="products__list-item product"
+          v-for="img in props.product.images"
+        >
+          <img :src="img.src" alt="" />
+        </swiper-slide>
+      </swiper>
+      <!-- </div> -->
       <div class="popup__content">
         <h3 class="popup__title">{{ props.product.title }}</h3>
         <p class="popup__code">Код товара: {{ props.product.sku }}</p>
@@ -78,6 +117,17 @@ const emits = defineEmits(['close']);
     <MobileLinks inpopup="true" @click.stop />
   </div>
 </template>
+<style>
+.popup__img .swiper-pagination-bullet-active {
+  background: #000;
+}
+.popup__img .swiper-wrapper{
+  align-items: center;
+}
+.popup__img .swiper-slide{
+  text-align: center;
+}
+</style>
 <style scoped>
 .overflow {
   width: 100vw;
@@ -143,7 +193,9 @@ const emits = defineEmits(['close']);
 }
 .popup__img {
   flex: 0 0 50%;
+  max-width: 100%;
 }
+
 .popup__img img {
   max-width: 100%;
   border-radius: 15px;
@@ -228,6 +280,5 @@ const emits = defineEmits(['close']);
   .popup__title {
     font-size: 24px;
   }
-  
 }
 </style>

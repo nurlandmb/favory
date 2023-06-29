@@ -31,10 +31,19 @@ watch(activePopup, async (newVal) => {
         <Address class="address" />
         <Contacts class="contacts" />
         <Socials class="socials" />
-        <a href="#" class="mobile"> Перейти в приложение </a>
       </div>
       <div class="wrapper">
         <nav class="footer__popup">
+          <button
+            class="footer__popup-item"
+            @click="
+              () => {
+                activePopup = 'about';
+              }
+            "
+          >
+            О компании
+          </button>
           <button
             @click="
               () => {
@@ -55,6 +64,46 @@ watch(activePopup, async (newVal) => {
           >
             Возврат / Гарантия
           </button>
+          <button
+            @click="
+              () => {
+                activePopup = 'shipment';
+              }
+            "
+            class="footer__popup-item"
+          >
+            Доставка и оплата
+          </button>
+          <button
+            @click="
+              () => {
+                activePopup = 'keepment';
+              }
+            "
+            class="footer__popup-item"
+          >
+            Хранение и уход
+          </button>
+          <button
+            @click="
+              () => {
+                activePopup = 'table';
+              }
+            "
+            class="footer__popup-item"
+          >
+            Таблица размеров
+          </button>
+          <button
+            @click="
+              () => {
+                activePopup = 'faq';
+              }
+            "
+            class="footer__popup-item"
+          >
+            Вопросы-ответы
+          </button>
         </nav>
       </div>
     </div>
@@ -68,7 +117,7 @@ watch(activePopup, async (newVal) => {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 40px; 
 }
 .footer__popup-item {
   display: block;
@@ -76,6 +125,7 @@ watch(activePopup, async (newVal) => {
   border: none;
   font-family: 'Avenir next', sans-serif;
   transition: 0.3s;
+  /* margin-bottom: 10px; */
 }
 .footer__popup-item:hover {
   opacity: 0.8;
@@ -83,7 +133,7 @@ watch(activePopup, async (newVal) => {
   color: #fff; */
 }
 .footer__popup-item:last-child {
-  margin-bottom: 0;
+  /* margin-bottom: 0; */
 }
 .container {
   max-width: 1340px;
@@ -139,6 +189,12 @@ watch(activePopup, async (newVal) => {
     display: none;
   }
   .footer__popup {
+    margin-top: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer__popup-item{
+    text-align: left;
   }
 }
 </style>

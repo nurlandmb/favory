@@ -8,7 +8,7 @@ const categories = ref([]);
 const isCategoriesFillActive = ref(false);
 const isSubCategoriesFillActive = ref(false);
 const subCategories = ref([]);
-const img = ref('');
+const images = ref([]);
 const title = ref('');
 const sku = ref('');
 const price = ref('');
@@ -25,7 +25,7 @@ const isImgLoading = ref(false);
 watch(
   () => props.product,
   () => {
-    img.value = props.product.img.small;
+    images.value = JSON.parse(JSON.stringify(props.product.images));
     title.value = props.product.title;
     sku.value = props.product.sku;
     price.value = props.product.price;
@@ -41,7 +41,7 @@ watch(
   { deep: true }
 );
 function validateInputs() {
-  if (!img.value) {
+  if (!images.value.length) {
     return { valid: false, msg: 'Изображение не загружено' };
   }
   if (!title.value) {
@@ -80,7 +80,7 @@ function validateInputs() {
   return { valid: true };
 }
 function closePopup() {
-  img.value = '';
+  images.value = [];
   title.value = '';
   sku.value = '';
   price.value = '';
@@ -104,7 +104,6 @@ async function getSubcategories() {
 async function submitHandler(e) {
   isLoading.value = true;
   const isValid = validateInputs();
-  console.log(isValid);
   if (!isValid.valid) {
     isLoading.value = false;
     return alert(isValid.msg);
@@ -115,10 +114,7 @@ async function submitHandler(e) {
     price: price.value,
     category: category.value.trim(),
     subcategory: subcategory.value.trim(),
-    img: {
-      small: img.value,
-      full: img.value,
-    },
+    images: images.value,
     info: {
       weight: weight.value.trim(),
       setting: setting.value.trim(),
@@ -150,15 +146,32 @@ async function imgUploadHandler(e) {
   bodyFormData.append('file', file);
   try {
     const { data } = await $api.post('/upload', bodyFormData);
-    console.log(data);
-    console.log('success');
-    img.value = data;
+    images.value = [...images.value, { src: data, isMain: false }];
     isImgLoading.value = false;
   } catch (err) {
     alert('Произошла ошибка. Пожалуйста, попробуйте снова');
     console.log(err);
     isImgLoading.value = false;
   }
+}
+function deleteImg(img){
+  console.log(img)
+  const allImg = [...images.value];
+  allImg.filter(item => item.src !== img.src);
+  images.value = allImg;
+  console.log(allImg);
+  // images.value = allImg;
+}
+function changeActiveImg(img) {
+  const allImg = [...images.value];
+  const newImg = allImg.map((item) => {
+    item.isMain = false;
+    if ((img.src === item.src)) {
+      item.isMain = true;
+    }
+    return item
+  });
+  images.value === newImg;
 }
 function closeAutofill(type) {
   setTimeout(() => {
@@ -207,12 +220,19 @@ onMounted(() => {
         />
       </svg>
     </button>
-    <div class="img" v-if="img">
-      <img :src="img" alt="picture" class="img__item" />
-      <button @click="() => (img = null)">Удалить</button>
+    <div class="wrapper" v-if="images.length">
+      <div class="img" v-for="img in images" :class="{ active: img.isMain }" @click.stop="() => changeActiveImg(img)">
+        <img
+          :src="img.src"
+          alt="picture"
+          class="img__item"
+          
+        />
+        <button @click.stop="() => (deleteImg(img))">Удалить</button>
+      </div>
     </div>
     <form class="form" @submit.prevent="submitHandler">
-      <label class="form__item" v-if="!img">
+      <label class="form__item">
         <p class="form__descr" :class="{ loading: isImgLoading }">
           <svg
             fill="none"
@@ -297,9 +317,12 @@ onMounted(() => {
           type="text"
           class="form__input"
         />
-        <ul class="form__autofill" :class="{
-          active: isSubCategoriesFillActive
-        }">
+        <ul
+          class="form__autofill"
+          :class="{
+            active: isSubCategoriesFillActive,
+          }"
+        >
           <li
             class="form__autofill-item"
             v-for="subCategoryItem in subCategories.filter((item) =>
@@ -385,25 +408,38 @@ onMounted(() => {
   opacity: 1;
   visibility: visible;
 }
-
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .img {
+  flex: 0 0 25%;
   margin-bottom: 10px;
   position: relative;
+  padding: 20px 0 0;
+}
+.img.active {
+  border: 2px solid #000;
+  border-radius: 5px;
 }
 .img img {
   max-width: 100%;
 }
 .img button {
+  margin: 5px;
   position: absolute;
-  right: 10px;
-  top: 10px;
-  padding: 5px 10px;
+  left: 0px;
+  right: 0;
+  top: 0px;
+  padding: 5px;
   border-radius: 5px;
   color: #fff;
   background: #fff;
   border: 1px solid #cc0033;
   color: #cc0033;
   transition: all 0.3s;
+  font-size: 12px;
 }
 .img button:hover {
   background: #cc0033;
