@@ -44,6 +44,9 @@ function validateInputs() {
   if (!images.value.length) {
     return { valid: false, msg: 'Изображение не загружено' };
   }
+  if(!images.value.find(img => img.isMain)){
+    return {valid: false, msg: 'Не выбрано главное изображение'}
+  }
   if (!title.value) {
     return { valid: false, msg: 'Название не найдено' };
   }
