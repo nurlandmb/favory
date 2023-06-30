@@ -51,8 +51,8 @@ let isBurgerActive = ref(false);
           </a>
         </div>
         <div class="flex">
-          <Socials class="header__socials" />
           <a href="#" class="mobile"> Перейти в приложение </a>
+          <Socials class="header__socials" />
         </div>
          <button
           class="burger"
@@ -81,12 +81,17 @@ let isBurgerActive = ref(false);
 
 .flex{
   
+  /* display: flex; */
   display: flex;
-  flex: 0 0 430px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 10px;
+  flex: 0 0 300px;
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 900px;
   width: 90%;
   margin: 0 auto;
 }
@@ -96,11 +101,10 @@ let isBurgerActive = ref(false);
   justify-content: center;
 }
 .header__contacts{
-  transform: translateX(100px);
-  flex: 0 0 430px;
+  flex: 0 0 300px;
 }
 .header__socials{
-  margin: 0 20px;
+  /* margin: 0 20px; */
 }
 .whatsapp,
 .burger,
