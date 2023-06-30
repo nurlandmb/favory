@@ -40,12 +40,21 @@ let isBurgerActive = ref(false);
             </defs>
           </svg>
         </a>
+        
+       
+       
+        
+        <Contacts class="header__contacts" />
         <div class="logo">
           <a href="#">
             <img src="../assets/logo.svg" />
           </a>
         </div>
-        <button
+        <div class="flex">
+          <Socials class="header__socials" />
+          <a href="#" class="mobile"> Перейти в приложение </a>
+        </div>
+         <button
           class="burger"
           :class="{ active: isBurgerActive }"
           @click="() => (isBurgerActive = !isBurgerActive)"
@@ -54,14 +63,11 @@ let isBurgerActive = ref(false);
           <span></span>
           <span></span>
         </button>
-        <div class="burger__content" :class="{ active: isBurgerActive }">
+         <div class="burger__content" :class="{ active: isBurgerActive }">
           <Address class="" />
           <Contacts class="" />
           <Socials class="" />
         </div>
-        <Contacts class="header__contacts" />
-        <Socials class="header__socials" />
-        <a href="#" class="mobile"> Перейти в приложение </a>
       </div>
     </div>
   </header>
@@ -70,18 +76,31 @@ let isBurgerActive = ref(false);
 <style scoped>
 .header {
   padding: 34px 0 44px;
+  position: relative;
 }
 
+.flex{
+  
+  display: flex;
+  flex: 0 0 430px;
+}
 
 .container {
-  max-width: 1100px;
+  max-width: 1000px;
   width: 90%;
   margin: 0 auto;
 }
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+.header__contacts{
+  transform: translateX(100px);
+  flex: 0 0 430px;
+}
+.header__socials{
+  margin: 0 20px;
 }
 .whatsapp,
 .burger,
@@ -102,9 +121,9 @@ let isBurgerActive = ref(false);
   color: var(--color-black);
 }
 @media (max-width: 1240px) {
-  .wrapper {
+  /* .wrapper {
     flex-wrap: wrap;
-  }
+  } */
 }
 @media (max-width: 991px) {
   .header {
@@ -115,6 +134,12 @@ let isBurgerActive = ref(false);
   .header__socials,
   .mobile {
     display: none;
+  }
+  .flex{
+    display: none;
+  }
+  .wrapper{
+    justify-content: space-between;
   }
   .whatsapp,
   .burger {

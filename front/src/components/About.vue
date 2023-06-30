@@ -63,7 +63,7 @@
     font-size: 24px;
   }
   .about__descr{
-    font-size: 12px;
+    font-size: 16px;
     margin-bottom: 50px;
   }
   .about__line{
