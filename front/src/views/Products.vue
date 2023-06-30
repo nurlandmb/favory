@@ -111,7 +111,7 @@ onMounted(() => {
       <div class="container">
         <div class="header__wrapper">
           <router-link to="/" class="logo">
-            <img src="../assets/logo-1.svg" alt="" />
+            <img src="../assets/logo.svg" alt="" />
           </router-link>
           <button class="header__logout" @click="logout">Выйти</button>
         </div>
