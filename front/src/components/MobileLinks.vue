@@ -54,7 +54,7 @@ const props = defineProps(['inpopup']);
   box-shadow: 0px 0px 60px rgba(194, 189, 180, 0.3);
 }
 .mobile__img {
-  max-width: 450px;
+  max-width: 500px;
   /* animation: rotate 2s ease-in-out 0s infinite both alternate; */
 }
 .popupMode .mobile__logo {
@@ -89,7 +89,7 @@ const props = defineProps(['inpopup']);
   margin-left: 48px;
 }
 .mobile__text {
-  font-size: 32px;
+  font-size: 36px;
   margin-bottom: 62px;
 }
 .popupMode .mobile__text {
@@ -114,6 +114,9 @@ const props = defineProps(['inpopup']);
   }
   .mobile__content {
     margin-left: 20px;
+  }
+  .mobile__text{
+    font-size: 28px;
   }
 }
 @media (max-width: 768px) {

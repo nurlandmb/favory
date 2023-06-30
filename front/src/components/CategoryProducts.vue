@@ -125,6 +125,7 @@ export default {
 .products__title {
   font-weight: 400;
   margin-bottom: 44px;
+  font-size: 32px;
 }
 .products__nav {
   display: flex;
@@ -156,6 +157,7 @@ export default {
 }
 .products .swiper-pagination {
   text-align: center;
+  position: relative;
 }
 .products .swiper-pagination-bullet {
   width: 6px;
@@ -211,6 +213,9 @@ export default {
     width: 100%;
     max-width: 100vw;
     overflow: hidden;
+  }
+  .products__title{
+      
   }
   .products .products__nav {
     overflow: scroll hidden;

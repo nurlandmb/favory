@@ -113,7 +113,7 @@
 .social__item:hover path {
   fill: #000;
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .social__item {
     margin: 10px 10px 0 0;
     visibility: visible;

@@ -1,5 +1,4 @@
 <script setup>
-import Address from './Address.vue';
 import Contacts from './Contacts.vue';
 import Socials from './Socials.vue';
 import FooterPopup from './FooterPopup.vue';
@@ -28,11 +27,14 @@ watch(activePopup, async (newVal) => {
             <img src="../assets/logo-hor.svg" />
           </a>
         </div>
-        <Address class="address" />
-        <Contacts class="contacts" />
-        <Socials class="socials" />
-      </div>
-      <div class="wrapper">
+        <div class="contacts-wrapper">
+          <p class="footer-title">Контакты</p>
+          <Contacts class="contacts" />
+        </div>
+        <div class="socials-wrapper">
+          <p class="footer-title">Мы в соцсетях:</p>
+          <Socials class="socials" />
+        </div>
         <nav class="footer__popup">
           <button
             class="footer__popup-item"
@@ -74,6 +76,8 @@ watch(activePopup, async (newVal) => {
           >
             Доставка и оплата
           </button>
+        </nav>
+        <nav class="footer__popup">
           <button
             @click="
               () => {
@@ -115,9 +119,11 @@ watch(activePopup, async (newVal) => {
 }
 .footer__popup {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 40px; 
+  flex-direction: column;
+  align-items: flex-start;
+  /* flex-wrap: wrap; */
+  gap: 10px;
+  /* margin-top: 40px;  */
 }
 .footer__popup-item {
   display: block;
@@ -135,6 +141,10 @@ watch(activePopup, async (newVal) => {
 .footer__popup-item:last-child {
   /* margin-bottom: 0; */
 }
+.footer-title{
+  margin-bottom: 15px;
+  font-size: 18px;
+}
 .container {
   max-width: 1340px;
   width: 90%;
@@ -142,7 +152,8 @@ watch(activePopup, async (newVal) => {
 }
 .wrapper {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start;
   justify-content: space-between;
 }
 .mobile {
@@ -158,24 +169,36 @@ watch(activePopup, async (newVal) => {
 @media (max-width: 1200px) {
   .wrapper {
     flex-wrap: wrap;
-    /* flex-direction: column; */
+    justify-content: flex-start;
   }
   .logo {
-    flex: 0 0 50%;
+    flex: 0 0 33%;
+    order: -1;
+  }
+  .contacts-wrapper{
+    flex: 0 0 33%;
+  }
+  .footer__popup{
+    flex: 0 0 33%;
+  }
+  .socials-wrapper{
+    order: -1;
+    flex: 0 0 33%;
   }
   .address {
-    flex: 0 0 50%;
-    text-align: right;
-    justify-content: flex-end;
-  }
+  } 
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .logo {
-    margin-bottom: 42px;
+    /* margin-bottom: 42px; */
   }
   .wrapper {
     flex-direction: column;
+    gap: 20px;
     align-items: flex-start;
+  }
+  .footer-title{
+    margin-bottom: 5px;
   }
   .address {
     text-align: left;
@@ -193,7 +216,7 @@ watch(activePopup, async (newVal) => {
     flex-direction: column;
     gap: 10px;
   }
-  .footer__popup-item{
+  .footer__popup-item {
     text-align: left;
   }
 }

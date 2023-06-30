@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import Address from './Address.vue';
 import Contacts from './Contacts.vue';
 import Socials from './Socials.vue';
 let isBurgerActive = ref(false);
@@ -60,7 +59,6 @@ let isBurgerActive = ref(false);
           <Contacts class="" />
           <Socials class="" />
         </div>
-        <Address class="header__address" />
         <Contacts class="header__contacts" />
         <Socials class="header__socials" />
         <a href="#" class="mobile"> Перейти в приложение </a>
@@ -73,8 +71,10 @@ let isBurgerActive = ref(false);
 .header {
   padding: 34px 0 44px;
 }
+
+
 .container {
-  max-width: 1340px;
+  max-width: 1100px;
   width: 90%;
   margin: 0 auto;
 }
@@ -105,26 +105,8 @@ let isBurgerActive = ref(false);
   .wrapper {
     flex-wrap: wrap;
   }
-  .logo {
-    flex: 0 0 50%;
-  }
-  .header__address {
-    margin-top: 20px;
-    order: 2;
-    flex: 0 0 40%;
-  }
-  .header__contacts {
-    order: 4;
-    text-align: right;
-    flex: 0 0 40%;
-  }
-  .header__socials {
-    justify-content: center;
-    order: 3;
-    flex: 0 0 20%;
-  }
 }
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .header {
     padding: 10px 0;
   }
@@ -166,7 +148,11 @@ let isBurgerActive = ref(false);
     transform: translateY(-8px) rotate(-45deg);
   }
   .logo {
+    max-width: 160px;
     text-align: center;
+  }
+  .logo img{
+    width: 100%;
   }
   .burger span:last-child {
     margin-bottom: 0;
@@ -176,7 +162,7 @@ let isBurgerActive = ref(false);
     display: block;
     right: 5%;
     left: 5%;
-    top: 100px;
+    top: 120px;
     background: #fff;
     border-radius: 14px;
     border: 2px solid #000;
