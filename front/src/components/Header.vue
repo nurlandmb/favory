@@ -89,7 +89,12 @@ let isBurgerActive = ref(false);
   gap: 10px;
   flex: 0 0 300px;
 }
-
+.logo{
+  max-width: 160px;
+}
+.logo img{
+  max-width: 100%;
+}
 .container {
   max-width: 900px;
   width: 90%;
@@ -98,7 +103,7 @@ let isBurgerActive = ref(false);
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 .header__contacts{
   flex: 0 0 300px;

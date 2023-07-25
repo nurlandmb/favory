@@ -125,7 +125,7 @@ export default {
 .products__title {
   font-weight: 400;
   margin-bottom: 44px;
-  font-size: 32px;
+  font-size: 24px;
 }
 .products__nav {
   display: flex;

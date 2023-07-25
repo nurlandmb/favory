@@ -37,7 +37,7 @@
   margin-bottom: 35px;
 }
 .about__title {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 400;
   margin-bottom: 30px;
 }

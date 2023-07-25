@@ -28,11 +28,9 @@ watch(activePopup, async (newVal) => {
           </a>
         </div>
         <div class="contacts-wrapper">
-          <p class="footer-title">Контакты</p>
           <Contacts class="contacts" />
         </div>
         <div class="socials-wrapper">
-          <p class="footer-title">Мы в соцсетях:</p>
           <Socials class="socials" />
         </div>
         <nav class="footer__popup">
@@ -134,7 +132,8 @@ watch(activePopup, async (newVal) => {
   /* margin-bottom: 10px; */
 }
 .footer__popup-item:hover {
-  opacity: 0.8;
+  /* opacity: 0.8; */
+  color: #202525;
   /* background-color: var(--color-black);
   color: #fff; */
 }
