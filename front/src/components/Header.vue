@@ -96,7 +96,7 @@ let isBurgerActive = ref(false);
   max-width: 100%;
 }
 .container {
-  max-width: 900px;
+  max-width: 1240px;
   width: 90%;
   margin: 0 auto;
 }
