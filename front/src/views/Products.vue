@@ -51,7 +51,6 @@ async function logout() {
   }
 }
 async function deleteProduct(e, product) {
-  console.log(e.target.textContent);
   if (e.target.textContent.trim() == 'Удалить') {
     setTimeout(() => {
       e.target.textContent = 'Удалить';
@@ -59,7 +58,6 @@ async function deleteProduct(e, product) {
     e.target.textContent = 'Вы уверены?';
   } else {
     try {
-      console.log(product);
       await $api.post('/delete', { id: product.id });
       await getProducts();
     } catch (error) {
