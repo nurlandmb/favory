@@ -5,7 +5,6 @@ import FooterPopup from './FooterPopup.vue';
 import { ref, watch } from 'vue';
 let activePopup = ref(null);
 const closePopup = () => {
-  console.log('closed');
   activePopup.value = null;
 };
 watch(activePopup, async (newVal) => {

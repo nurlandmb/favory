@@ -33,8 +33,6 @@ async function imgUploadHandler(e) {
   bodyFormData.append('file', file);
   try {
     const { data } = await $api.post('/upload', bodyFormData);
-    console.log(data);
-    console.log('success');
     img.value = data;
     isImgLoading.value = false;
   } catch (err) {

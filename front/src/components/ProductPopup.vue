@@ -44,8 +44,8 @@ function validateInputs() {
   if (!images.value.length) {
     return { valid: false, msg: 'Изображение не загружено' };
   }
-  if(!images.value.find(img => img.isMain)){
-    return {valid: false, msg: 'Не выбрано главное изображение'}
+  if (!images.value.find((img) => img.isMain)) {
+    return { valid: false, msg: 'Не выбрано главное изображение' };
   }
   if (!title.value) {
     return { valid: false, msg: 'Название не найдено' };
@@ -157,22 +157,20 @@ async function imgUploadHandler(e) {
     isImgLoading.value = false;
   }
 }
-function deleteImg(img){
-  console.log(img)
-  const allImg = [...images.value];
-  allImg.filter(item => item.src !== img.src);
+function deleteImg(img) {
+  let allImg = [...images.value];
+  allImg = allImg.filter((item) => item.src !== img.src);
   images.value = allImg;
-  console.log(allImg);
   // images.value = allImg;
 }
 function changeActiveImg(img) {
   const allImg = [...images.value];
   const newImg = allImg.map((item) => {
     item.isMain = false;
-    if ((img.src === item.src)) {
+    if (img.src === item.src) {
       item.isMain = true;
     }
-    return item
+    return item;
   });
   images.value === newImg;
 }
@@ -224,14 +222,14 @@ onMounted(() => {
       </svg>
     </button>
     <div class="wrapper" v-if="images.length">
-      <div class="img" v-for="img in images" :class="{ active: img.isMain }" @click.stop="() => changeActiveImg(img)">
-        <img
-          :src="img.src"
-          alt="picture"
-          class="img__item"
-          
-        />
-        <button @click.stop="() => (deleteImg(img))">Удалить</button>
+      <div
+        class="img"
+        v-for="img in images"
+        :class="{ active: img.isMain }"
+        @click.stop="() => changeActiveImg(img)"
+      >
+        <img :src="img.src" alt="picture" class="img__item" />
+        <button @click.stop="() => deleteImg(img)">Удалить</button>
       </div>
     </div>
     <form class="form" @submit.prevent="submitHandler">

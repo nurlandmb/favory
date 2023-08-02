@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const dev = 'http://localhost:5000';;
+const dev = 'http://localhost:5000';
 export const API_URL = '/api';
 const $api = axios.create({
   withCredentials: true,
@@ -9,7 +9,9 @@ const $api = axios.create({
 
 $api.interceptors.request.use((config) => {
   if (!config.headers) return config;
-  config.headers.Authorization = `Bearer ${localStorage.getItem('favory-token')}`;
+  config.headers.Authorization = `Bearer ${localStorage.getItem(
+    'favory-token'
+  )}`;
   return config;
 });
 
