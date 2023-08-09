@@ -1,7 +1,7 @@
 <template>
   <section class="banners">
     <swiper
-      :breakpoints="{ 600: { slidesPerView: 1 }, 900: { slidesPerView: 1.2 } }"
+      :breakpoints="{ 600: { slidesPerView: 1 }, 900: { slidesPerView: 1 } }"
       space-between="30"
       :centered-slides="true"
       :pagination="pagination"
@@ -9,7 +9,7 @@
       :auto-height="false"
       :loop="true"
       :autoplay="{
-        delay: 3000
+        delay: 3000,
       }"
     >
       <swiper-slide v-for="banner in props.banners">
@@ -56,7 +56,7 @@ export default {
 </script>
 <style>
 .banners {
-  margin-bottom: 70px;
+  margin-bottom: 30px;
 }
 .banners .swiper-pagination {
   text-align: center;
@@ -91,8 +91,7 @@ export default {
   overflow: hidden;
 }
 .banners .swiper-slide {
-  max-height: 70vh;
-  height: auto;
+  height: 80vh;
 }
 .banners .swiper-slide img,
 .banners .swiper-slide-active img,
@@ -103,9 +102,14 @@ export default {
   object-fit: cover;
   object-position: center;
 }
+@media (max-width: 991px) {
+  .banners .swiper-slide {
+    height: auto;
+  }
+}
 @media (max-width: 768px) {
   .banners {
-    margin: 0 5% 53px;
+    margin: 0 5% 23px;
     max-height: 400px;
   }
 }

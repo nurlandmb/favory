@@ -71,7 +71,7 @@ export default {
         1100: { slidesPerView: 4 },
       }"
       :pagination="pagination"
-      space-between="30"
+      space-between="50"
       class="products__list"
       :watch-overflow="true"
       :autoplay="{ delay: 3000 }"
@@ -80,7 +80,7 @@ export default {
         class="products__list-item product"
         v-for="product in filteredProducts"
       >
-        <button @click="$emit('openPopup', product)">
+        <router-link :to="`/${product.id}`">
           <div class="product__img">
             <img :src="product.images.find(img => img.isMain).src" :alt="product.title" />
           </div>
@@ -89,7 +89,7 @@ export default {
           <p class="product__price">
             {{ product.price.toLocaleString('ru-RU') }} ₸
           </p>
-        </button>
+        </router-link>
       </swiper-slide>
     </swiper>
     <div class="swiper-pagination"></div>
@@ -116,16 +116,16 @@ export default {
 </template>
 <style>
 .products {
-  max-width: 900px;
+  max-width: 1000px;
   width: 90%;
   margin: 0 auto;
   text-align: center;
-  padding: 44px 0;
+  padding: 10px 0;
 }
 .products__title {
   font-weight: 400;
-  margin-bottom: 44px;
-  font-size: 24px;
+  margin-bottom: 24px;
+  font-size: 38px;
 }
 .products__nav {
   display: flex;
@@ -140,6 +140,18 @@ export default {
   text-transform: uppercase;
   font-weight: 400;
   transition: color 0.3s;
+  position: relative;
+  
+}
+.products__nav-btn::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background-color: #000;
 }
 .products__nav-btn:hover {
   color: var(--color-black);
@@ -149,8 +161,12 @@ export default {
   color: var(--color-black);
 }
 .products__nav-btn:not(:last-child) {
-  margin-right: 37px;
+  margin-right: 20px;
+  padding-right: 20px;
 }
+.products__nav-btn:last-child::after{
+  display: none;
+} 
 .products__list {
   list-style: none;
   gap: 20px;

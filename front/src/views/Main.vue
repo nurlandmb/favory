@@ -55,18 +55,19 @@ onMounted(() => {
 });
 </script>
 <template>
-  <Popup :active="isPopupActive" @close="closePopup" :product="popupProduct" />
+  <!-- <Popup :active="isPopupActive" @close="closePopup" :product="popupProduct" /> -->
   <Header />
   <Loader v-if="isBannersLoading" />
   <Banners v-else :banners="banners" />
-  <About />
+   <About />
   <Loader v-if="isProductsLoading" />
   <CategoryProducts
     v-else
     @open-popup="openPopup"
     v-for="category in categories"
+
     :category="category"
-  />
-  <MobileLinks />
-  <Footer />
+    />
+   <MobileLinks />
+  <Footer /> -->
 </template>

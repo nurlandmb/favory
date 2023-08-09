@@ -23,6 +23,7 @@ router.post('/create', AuthMiddleware, productController.create);
 router.post('/delete', AuthMiddleware, productController.delete);
 router.post('/edit', AuthMiddleware, productController.edit);
 router.get('/all', productController.getAll);
+router.get('/product/:id', productController.getProduct);
 router.post('/banner/create', AuthMiddleware, bannerController.create);
 router.post('/banner/delete', AuthMiddleware, bannerController.delete);
 router.get('/banner/all', bannerController.getAll);

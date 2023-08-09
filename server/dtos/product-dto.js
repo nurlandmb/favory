@@ -15,6 +15,7 @@ class ProductDto {
     this.subcategory = model.subcategory;
     this.images = model.images;
     this.info = model.info;
+    this.description = model.description;
     this.id = model._id;
   }
 }

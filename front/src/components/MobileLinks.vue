@@ -3,13 +3,15 @@ const props = defineProps(['inpopup']);
 </script>
 <template>
   <section class="mobile" :class="{ popupMode: props.inpopup }">
-    <div v-if="props.inpopup" class="mobile__logo">
-      <img src="../assets/logo.svg" alt="" />
-    </div>
-    <img class="mobile__img" src="../assets/phone.webp" alt="" />
     <div class="mobile__content">
       <p class="mobile__text">
-        Заказывай ювелирные изделия через мобильное приложение Favory!
+        Мобильное приложение
+      </p>
+      <p class="mobile__descr">
+        <i>
+          Скачивай наше мобильное приложение и узнавай о новинках первым
+
+        </i>
       </p>
       <ul class="mobile__links">
         <li class="mobile__links-item">
@@ -37,72 +39,36 @@ const props = defineProps(['inpopup']);
 }
 .mobile {
   overflow: hidden;
-  background-color: #f1efea;
-  padding: 12px 40px;
+  background-color: #ededed;
+  margin-top: 15px;
+  padding: 40px 40px 35px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.mobile__logo {
-  position: absolute;
-  top: 78px;
-  left: 130px;
-  background: #ffffff;
-  border-radius: 33px;
-  padding: 33px 17px;
-  box-shadow: 0px 0px 60px rgba(194, 189, 180, 0.3);
-}
-.mobile__img {
-  max-width: 500px;
-  /* animation: rotate 2s ease-in-out 0s infinite both alternate; */
-}
-.popupMode .mobile__logo {
-  top: 27px;
-  left: 26px;
-  padding: 26px 13px;
-}
-.popupMode {
-  border: 1px solid #adadad;
-  border-radius: 15px;
-  max-width: 100%;
-  padding: 0;
-  overflow: visible;
-}
-.popupMode .mobile__img {
-  width: 280px;
-  height: 254px;
-  margin: -20px 0 -20px 27px;
-}
-.popupMode .mobile__logo img {
-  width: 74px;
-  height: 44px;
-}
-.mobile__logo img {
-  width: 96px;
-  height: 58px;
-}
+
 .mobile__content {
-  margin-left: 99px;
+  margin: 0 auto;
+  text-align: center;
 }
-.popupMode .mobile__content {
-  margin-left: 48px;
-}
+
 .mobile__text {
-  font-size: 36px;
-  margin-bottom: 62px;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
-.popupMode .mobile__text {
-  font-weight: 500;
-  font-size: 24px;
-  margin-bottom: 25px;
+.mobile__descr{
+  font-size: 21px;
+  margin-bottom: 35px;
 }
 .mobile__links {
-  display: flex;
   list-style: none;
 }
 .mobile__links-item {
-  margin-right: 21px;
+  margin-bottom: 10px;
+}
+.mobile__links-item img{
+  width: 190px;
 }
 @media (max-width: 1200px) {
   .mobile__logo {
@@ -113,7 +79,7 @@ const props = defineProps(['inpopup']);
     max-width: 40%;
   }
   .mobile__content {
-    margin-left: 20px;
+    /* margin-left: 20px; */
   }
   .mobile__text{
     font-size: 28px;

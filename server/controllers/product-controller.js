@@ -66,10 +66,18 @@ class ProductController {
   }
   async delete(req, res, next) {
     try {
-      console.log(req.body);
       const result = await productService.delete(req.body.id);
       res.send(result);
     } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+  async getProduct(req, res, next){
+    try{
+      const result = await productService.getProduct(req.params.id);
+      res.send(result)
+    }catch(error){
       console.log(error);
       next(error);
     }

@@ -17,6 +17,7 @@ const subcategory = ref('');
 const weight = ref('');
 const setting = ref('');
 const metal = ref('');
+const description = ref('');
 const content = ref('');
 const collection = ref('');
 const warranty = ref('');
@@ -34,6 +35,7 @@ watch(
     weight.value = props.product.info.weight;
     setting.value = props.product.info.setting;
     metal.value = props.product.info.metal;
+    description.value = props.product.description;
     content.value = props.product.info.content;
     collection.value = props.product.info.collection;
     warranty.value = props.product.info.warranty;
@@ -94,6 +96,7 @@ function closePopup() {
   content.value = '';
   collection.value = '';
   warranty.value = '';
+  description.value = '';
   emit('close');
 }
 async function getCategories() {
@@ -118,6 +121,7 @@ async function submitHandler(e) {
     category: category.value.trim(),
     subcategory: subcategory.value.trim(),
     images: images.value,
+    description: description.value,
     info: {
       weight: weight.value.trim(),
       setting: setting.value.trim(),
@@ -270,6 +274,9 @@ onMounted(() => {
       <label class="form__item">
         <span class="form__span"> Цена </span>
         <input v-model="price" class="form__input" type="number" />
+      </label>
+      <label class="form__item">
+        <textarea v-model="description" placeholder="Описание" class="form__input textarea"/>
       </label>
       <label class="form__item">
         <span class="form__span"> Категория </span>
@@ -510,6 +517,10 @@ onMounted(() => {
   border-radius: 5px;
   border: 1px solid #000;
   padding: 10px;
+}
+.form__input.textarea{
+  min-height: 200px;
+  resize: vertical;
 }
 .form__span {
   margin: 5px;

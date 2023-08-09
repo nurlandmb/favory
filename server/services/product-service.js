@@ -92,13 +92,18 @@ class ProductService {
     newProduct.subcategory = product.subcategory;
     newProduct.images = product.images;
     newProduct.info = product.info;
+    newProduct.description = product.description;
     const updatedProduct = await newProduct.save();
     const productDto = new ProductDto(updatedProduct);
     return productDto;
   }
+  async getProduct(id){
+    const product = await ProductModel.findOne({_id: id});
+    if(!product) return null;
+    return new ProductDto(product)
+  }
   async delete(id) {
     const product = await ProductModel.deleteOne({ _id: id });
-
     if (!product) {
       throw ApiError.BadRequest('Товар не найден');
     } else {

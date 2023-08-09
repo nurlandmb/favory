@@ -24,7 +24,7 @@ const routes = [
       } catch (error) {
         console.log(error);
         localStorage.removeItem('favory-token');
-        return next('/login')
+        return next('/login');
       }
     },
   },
@@ -33,6 +33,11 @@ const routes = [
     name: 'Main',
     component: Main,
   },
+  {
+    path: '/:id',
+    name: 'Product',
+    component: () => import('./views/Product.vue'),
+  },
 ];
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
@@ -40,6 +45,13 @@ const routes = [
 const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  },
   routes, // short for `routes: routes`
 });
 
