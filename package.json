@@ -1,0 +1,21 @@
+{
+  "name": "Favory",
+  "version": "1.0.0",
+  "description": "Fullstack app Vue+Node.js",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd server && npm install && cd ../front && npm install && npm run build",
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nurlandmb/favory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nurlandmb/favory/issues"
+  },
+  "homepage": "https://github.com/nurlandmb/favory#readme"
+}
